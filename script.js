@@ -3,9 +3,9 @@
 // ========================================
 let siteConfig = {
     name: "Mahtab Hussain Mahi",
-    whatsapp: "+8801XXXXXXXXX",
+    whatsapp: "+8801765671029",
     phone: "01XXXXXXXXX",
-    email: "mahtab@example.com"
+    email: "mahtabmahi391@gmail.com"
 };
 
 let accounts = [
@@ -14,7 +14,7 @@ let accounts = [
         name: "bKash",
         type: "Personal",
         holder: "Mahtab Hussain Mahi",
-        number: "01XXXXXXXXX",
+        number: "01765671029",
         qr: "images/qr/bkash.png"
     },
     {
@@ -22,7 +22,7 @@ let accounts = [
         name: "Nagad",
         type: "Personal",
         holder: "Mahtab Hussain Mahi",
-        number: "01XXXXXXXXX",
+        number: "01765671029",
         qr: "images/qr/nagad.png"
     }
 ];
