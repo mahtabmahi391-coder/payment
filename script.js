@@ -4,7 +4,7 @@
 let siteConfig = {
     name: "Mahtab Hussain Mahi",
     whatsapp: "+8801765671029",
-    phone: "01XXXXXXXXX",
+    phone: "01765671029",
     email: "mahtabmahi391@gmail.com"
 };
 
