@@ -1,22 +1,21 @@
 // ========================================
-// EDIT YOUR INFORMATION HERE
+// DEFAULT DATA
 // ========================================
-
-const siteConfig = {
+let siteConfig = {
     name: "Mahtab Hussain Mahi",
-    whatsapp: "+8801XXXXXXXXX", // Add your number
-    phone: "01XXXXXXXXX",     // Add your number
-    email: "mahtab@example.com" // Add your email
+    whatsapp: "+8801XXXXXXXXX",
+    phone: "01XXXXXXXXX",
+    email: "mahtab@example.com"
 };
 
-const accounts = [
+let accounts = [
     {
         id: "bkash",
         name: "bKash",
         type: "Personal",
         holder: "Mahtab Hussain Mahi",
         number: "01XXXXXXXXX",
-        qr: "images/qr/bkash.png" // Ensure this image exists
+        qr: "images/qr/bkash.png"
     },
     {
         id: "nagad",
@@ -24,17 +23,157 @@ const accounts = [
         type: "Personal",
         holder: "Mahtab Hussain Mahi",
         number: "01XXXXXXXXX",
-        qr: "images/qr/nagad.png" // Ensure this image exists
-    },
-    {
-        id: "bank",
-        name: "Dutch-Bangla Bank",
-        type: "Savings Account",
-        holder: "Mahtab Hussain Mahi",
-        number: "123.456.78910",
-        branch: "Main Branch, Dhaka",
-        qr: "" // Leave empty if no QR
+        qr: "images/qr/nagad.png"
     }
+];
+
+// ========================================
+// CORE LOGIC
+// ========================================
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Load data from phone memory if it exists
+    const savedConfig = localStorage.getItem('siteConfig');
+    const savedAccounts = localStorage.getItem('accounts');
+    
+    if (savedConfig) siteConfig = JSON.parse(savedConfig);
+    if (savedAccounts) accounts = JSON.parse(savedAccounts);
+
+    renderAll();
+});
+
+function renderAll() {
+    document.getElementById('display-name').innerText = siteConfig.name;
+    renderAccounts();
+    renderContact();
+}
+
+function renderAccounts() {
+    const container = document.getElementById('accounts-container');
+    container.innerHTML = accounts.map(acc => `
+        <div class="card">
+            <div class="card-header">
+                <span class="method-name">${acc.name}</span>
+                <span class="method-type">${acc.type}</span>
+            </div>
+            <div class="info-group">
+                <span class="label">Account Name</span>
+                <span class="value">${acc.holder}</span>
+            </div>
+            <div class="info-group">
+                <span class="label">Number</span>
+                <span class="value">${acc.number}</span>
+            </div>
+            <div class="button-grid">
+                <button class="btn btn-cyan" onclick="copyText('${acc.number}', this)">Copy Number</button>
+                <button class="btn btn-outline" onclick="copyDetails('${acc.id}')">Copy Details</button>
+                ${acc.qr ? `<button class="btn btn-outline" style="grid-column: span 2;" onclick="openQR('${acc.qr}', '${acc.name}')">Show QR Code</button>` : ''}
+            </div>
+        </div>
+    `).join('');
+}
+
+function renderContact() {
+    const contactBox = document.getElementById('contact-info');
+    contactBox.innerHTML = `
+        <h2>Need help?</h2>
+        <a href="tel:${siteConfig.phone}" class="contact-item"><span>Phone:</span> ${siteConfig.phone}</a>
+        <a href="mailto:${siteConfig.email}" class="contact-item"><span>Email:</span> ${siteConfig.email}</a>
+    `;
+}
+
+// ========================================
+// EDIT MODE FUNCTIONS
+// ========================================
+
+function toggleEditMode() {
+    const modal = document.getElementById('edit-modal');
+    const fieldsDiv = document.getElementById('edit-fields');
+    
+    // Create inputs for the Config
+    let html = `<h3>Profile</h3>`;
+    html += `<div class="edit-input-group"><label>Your Name</label><input id="edit-name" value="${siteConfig.name}"></div>`;
+    
+    // Create inputs for each Account
+    html += `<h3>Accounts</h3>`;
+    accounts.forEach((acc, index) => {
+        html += `
+            <div style="border:1px solid #eee; padding:10px; border-radius:10px; margin-bottom:10px;">
+                <div class="edit-input-group"><label>${acc.name} Number</label>
+                <input class="acc-num-input" data-index="${index}" value="${acc.number}"></div>
+            </div>
+        `;
+    });
+
+    fieldsDiv.innerHTML = html;
+    modal.style.display = "flex";
+}
+
+function saveEdits() {
+    // Get new name
+    siteConfig.name = document.getElementById('edit-name').value;
+    
+    // Get new numbers
+    const numInputs = document.querySelectorAll('.acc-num-input');
+    numInputs.forEach(input => {
+        const index = input.getAttribute('data-index');
+        accounts[index].number = input.value;
+    });
+
+    // Save to device memory (LocalStorage)
+    localStorage.setItem('siteConfig', JSON.stringify(siteConfig));
+    localStorage.setItem('accounts', JSON.stringify(accounts));
+
+    renderAll();
+    closeEditModal();
+    showToast("Saved to your device!");
+}
+
+function closeEditModal() {
+    document.getElementById('edit-modal').style.display = "none";
+}
+
+// ========================================
+// UTILS (Copy, Toast, QR)
+// ========================================
+
+window.copyText = (text, btn) => {
+    navigator.clipboard.writeText(text).then(() => {
+        const oldText = btn.innerText;
+        btn.innerText = "✓ Copied";
+        showToast();
+        setTimeout(() => { btn.innerText = oldText; }, 2000);
+    });
+};
+
+window.copyDetails = (id) => {
+    const acc = accounts.find(a => a.id === id);
+    const text = `${acc.holder}\n${acc.name}\nNumber: ${acc.number}`;
+    navigator.clipboard.writeText(text).then(() => showToast("Details Copied"));
+};
+
+function showToast(msg = "Copied to clipboard") {
+    const toast = document.getElementById('toast');
+    toast.innerText = msg;
+    toast.className = "toast show";
+    setTimeout(() => { toast.className = "toast"; }, 3000);
+}
+
+window.openQR = (img, name) => {
+    document.getElementById('modal-title').innerText = name;
+    document.getElementById('modal-img').src = img;
+    document.getElementById('qr-modal').style.display = "flex";
+};
+
+// Share Link
+document.getElementById('share-btn').addEventListener('click', () => {
+    if (navigator.share) {
+        navigator.share({ title: siteConfig.name, url: window.location.href });
+    } else {
+        navigator.clipboard.writeText(window.location.href);
+        showToast("Link Copied");
+    }
+});    }
 ];
 
 // ========================================
