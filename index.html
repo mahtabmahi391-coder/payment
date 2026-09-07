@@ -6,12 +6,8 @@
     <title>Mahtab Hussain Mahi — Payment Accounts</title>
     <meta name="description" content="View Mahtab Hussain Mahi's payment and account information.">
     <meta name="theme-color" content="#00B4D8">
-    
-    <!-- PWA Meta Tags -->
     <link rel="manifest" href="manifest.json">
     <link rel="apple-touch-icon" href="icons/icon-192.png">
-    
-    <!-- Styles -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -19,39 +15,46 @@
     <div id="app">
         <header>
             <div class="profile-logo">MHM</div>
-            <h1>Mahtab Hussain Mahi</h1>
+            <h1 id="display-name">Mahtab Hussain Mahi</h1>
             <p class="subtitle">Payment Accounts</p>
             <p class="description">Choose your preferred payment method.</p>
         </header>
 
         <main id="accounts-container">
-            <!-- Accounts will be loaded here by script.js -->
+            <!-- Accounts loaded by JS -->
         </main>
 
         <section class="contact-section" id="contact-info">
-            <!-- Contact info loaded here -->
+            <!-- Contact info loaded by JS -->
         </section>
 
         <footer>
-            <button id="share-btn" class="share-btn">
-                <span>Share My Info</span>
-            </button>
+            <button id="share-btn" class="share-btn">Share My Info</button>
             <p>© 2026 Mahtab Hussain Mahi</p>
-            <p class="footer-sub">Payment Information</p>
+            <button onclick="toggleEditMode()" class="admin-lock">Admin Mode</button>
         </footer>
+    </div>
+
+    <!-- Edit Modal (Hidden by default) -->
+    <div id="edit-modal" class="modal">
+        <div class="modal-content" style="max-width: 400px; text-align: left;">
+            <span class="close-modal" onclick="closeEditModal()">&times;</span>
+            <h2 style="margin-bottom:15px; color:var(--cyan)">Edit Account Data</h2>
+            <div id="edit-fields"></div>
+            <button class="btn btn-cyan" style="width:100%; margin-top:20px;" onclick="saveEdits()">Save to My Device</button>
+            <p style="font-size:11px; margin-top:10px; color:#666;">Note: Saving here only updates your browser. To update for everyone, you must edit script.js on GitHub.</p>
+        </div>
     </div>
 
     <!-- QR Modal -->
     <div id="qr-modal" class="modal">
         <div class="modal-content">
-            <span class="close-modal">&times;</span>
+            <span class="close-modal" onclick="document.getElementById('qr-modal').style.display='none'">&times;</span>
             <h3 id="modal-title">QR Code</h3>
             <img src="" id="modal-img" alt="QR Code">
-            <p>Scan to pay</p>
         </div>
     </div>
 
-    <!-- Toast Notification -->
     <div id="toast" class="toast">Copied to clipboard</div>
 
     <script src="script.js"></script>
