@@ -1,0 +1,21 @@
+{
+  "name": "Mahtab Hussain Mahi — Payment Accounts",
+  "short_name": "Mahi Payments",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#00B4D8",
+  "description": "View Mahtab Hussain Mahi's payment and account information.",
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

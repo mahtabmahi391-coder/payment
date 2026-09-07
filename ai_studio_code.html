@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Mahtab Hussain Mahi — Payment Accounts</title>
+    <meta name="description" content="View Mahtab Hussain Mahi's payment and account information.">
+    <meta name="theme-color" content="#00B4D8">
+    
+    <!-- PWA Meta Tags -->
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="icons/icon-192.png">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="app">
+        <header>
+            <div class="profile-logo">MHM</div>
+            <h1>Mahtab Hussain Mahi</h1>
+            <p class="subtitle">Payment Accounts</p>
+            <p class="description">Choose your preferred payment method.</p>
+        </header>
+
+        <main id="accounts-container">
+            <!-- Accounts will be loaded here by script.js -->
+        </main>
+
+        <section class="contact-section" id="contact-info">
+            <!-- Contact info loaded here -->
+        </section>
+
+        <footer>
+            <button id="share-btn" class="share-btn">
+                <span>Share My Info</span>
+            </button>
+            <p>© 2026 Mahtab Hussain Mahi</p>
+            <p class="footer-sub">Payment Information</p>
+        </footer>
+    </div>
+
+    <!-- QR Modal -->
+    <div id="qr-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h3 id="modal-title">QR Code</h3>
+            <img src="" id="modal-img" alt="QR Code">
+            <p>Scan to pay</p>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast">Copied to clipboard</div>
+
+    <script src="script.js"></script>
+</body>
+</html>
