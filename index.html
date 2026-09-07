@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#00B4D8">
+    <meta name="description" content="Mahtab Hussain Mahi's payment and account information.">
     <title>Mahtab Hussain Mahi</title>
+    <link rel="manifest" href="manifest.json">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -15,66 +18,32 @@
             <p class="description">Choose your preferred payment method.</p>
         </header>
 
-        <hr style="border: 0; border-top: 1px solid #333; margin: 20px 0;">
+        <hr>
 
-        <!-- THIS IS WHERE BKASH/NAGAD CARDS APPEAR -->
         <main id="accounts-container"></main>
 
         <button id="share-btn" class="share-btn">Share My Info</button>
 
         <footer>
             <p>© 2026 Mahtab Hussain Mahi</p>
-            <!-- ADMIN MODE BUTTON -->
-            <button onclick="toggleEditMode()" class="admin-lock">Admin Mode</button>
+            <button id="admin-btn" class="admin-lock" type="button">Admin Mode</button>
         </footer>
     </div>
 
-    <!-- EDIT MODAL -->
-    <div id="edit-modal" class="modal">
-        <div class="modal-content">
-            <span class="close-modal" onclick="closeEditModal()">&times;</span>
-            <h2 style="color:black; margin-bottom:15px;">Edit Information</h2>
+    <div id="edit-modal" class="modal" aria-hidden="true">
+        <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="edit-title">
+            <button class="close-modal" id="close-modal" type="button" aria-label="Close">&times;</button>
+            <h2 id="edit-title">Edit Information</h2>
             <div id="edit-fields"></div>
-            <button class="btn btn-cyan" style="width:100%; margin-top:20px;" onclick="saveEdits()">Save to Device</button>
+            <button class="btn btn-cyan save-btn" id="save-btn" type="button">Save to Device</button>
+            <p class="modal-note">
+                Changes are saved only in this browser/device. To change the default information for everyone,
+                edit <strong>script.js</strong> and publish the updated files to GitHub.
+            </p>
         </div>
     </div>
 
-    <div id="toast" class="toast">Copied to clipboard</div>
-
-    <script src="script.js"></script>
-</body>
-</html>            <h2 style="color:black; margin-bottom:15px;">Edit Details</h2>
-            <div id="edit-fields"></div>
-            <button class="btn btn-cyan" style="width:100%; margin-top:20px;" onclick="saveEdits()">Save to Device</button>
-        </div>
-    </div>
-
-    <div id="toast" class="toast">Copied!</div>
-
-    <script src="script.js"></script>
-</body>
-</html>
-    <!-- Edit Modal (Hidden by default) -->
-    <div id="edit-modal" class="modal">
-        <div class="modal-content" style="max-width: 400px; text-align: left;">
-            <span class="close-modal" onclick="closeEditModal()">&times;</span>
-            <h2 style="margin-bottom:15px; color:var(--cyan)">Edit Account Data</h2>
-            <div id="edit-fields"></div>
-            <button class="btn btn-cyan" style="width:100%; margin-top:20px;" onclick="saveEdits()">Save to My Device</button>
-            <p style="font-size:11px; margin-top:10px; color:#666;">Note: Saving here only updates your browser. To update for everyone, you must edit script.js on GitHub.</p>
-        </div>
-    </div>
-
-    <!-- QR Modal -->
-    <div id="qr-modal" class="modal">
-        <div class="modal-content">
-            <span class="close-modal" onclick="document.getElementById('qr-modal').style.display='none'">&times;</span>
-            <h3 id="modal-title">QR Code</h3>
-            <img src="" id="modal-img" alt="QR Code">
-        </div>
-    </div>
-
-    <div id="toast" class="toast">Copied to clipboard</div>
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
     <script src="script.js"></script>
 </body>
