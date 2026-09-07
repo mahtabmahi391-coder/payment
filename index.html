@@ -7,34 +7,43 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-    <!-- TEST BUTTON AT TOP -->
-    <button onclick="toggleEditMode()" style="background:red; color:white; padding:10px; width:100%; border:none; font-weight:bold;">
-        CLICK HERE TO TEST ADMIN MODE
-    </button>
-
     <div id="app">
         <header>
             <div class="profile-logo">MHM</div>
             <h1 id="display-name">Mahtab Hussain Mahi</h1>
-            <p class="subtitle">Payment Accounts</p>
+            <p class="subtitle">PAYMENT ACCOUNTS</p>
+            <p class="description">Choose your preferred payment method.</p>
         </header>
 
+        <hr style="border: 0; border-top: 1px solid #333; margin: 20px 0;">
+
+        <!-- THIS IS WHERE BKASH/NAGAD CARDS APPEAR -->
         <main id="accounts-container"></main>
 
-        <section id="contact-info" class="contact-section"></section>
+        <button id="share-btn" class="share-btn">Share My Info</button>
 
         <footer>
-            <button id="share-btn" class="share-btn">Share My Link</button>
             <p>© 2026 Mahtab Hussain Mahi</p>
+            <!-- ADMIN MODE BUTTON -->
+            <button onclick="toggleEditMode()" class="admin-lock">Admin Mode</button>
         </footer>
     </div>
 
-    <!-- THE EDIT MODAL -->
+    <!-- EDIT MODAL -->
     <div id="edit-modal" class="modal">
         <div class="modal-content">
             <span class="close-modal" onclick="closeEditModal()">&times;</span>
-            <h2 style="color:black; margin-bottom:15px;">Edit Details</h2>
+            <h2 style="color:black; margin-bottom:15px;">Edit Information</h2>
+            <div id="edit-fields"></div>
+            <button class="btn btn-cyan" style="width:100%; margin-top:20px;" onclick="saveEdits()">Save to Device</button>
+        </div>
+    </div>
+
+    <div id="toast" class="toast">Copied to clipboard</div>
+
+    <script src="script.js"></script>
+</body>
+</html>            <h2 style="color:black; margin-bottom:15px;">Edit Details</h2>
             <div id="edit-fields"></div>
             <button class="btn btn-cyan" style="width:100%; margin-top:20px;" onclick="saveEdits()">Save to Device</button>
         </div>
